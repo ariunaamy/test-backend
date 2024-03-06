@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model sponsors {
+  auth0_id      String  @id @db.VarChar(50)
+  total_donated BigInt? @default(0)
+}
+
+model refugees {
+  auth0_id      String  @id @db.VarChar(50)
+  total_received BigInt? @default(0)
+}
+
+model posts {
+  id            Int     @id @default(autoincrement())
+  title         String
+  content       String
+  author        String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  published_at  DateTime?
+  published     Boolean  @default(false)
+  author_id     String
+ 
+}
